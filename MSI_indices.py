@@ -298,3 +298,54 @@ def TCT_Greeness_1(image):
           'B12' : image.select('B12'),},
   ).rename('TCT_Brightness_1')
   return TCT_brightness_1
+
+def RVI_V(img):
+    """
+    Calculate Radar Vegetation Index (RVI) for vertical polarization.
+
+    Parameters:
+    img (ee.Image): Sentinel-1 image.
+
+    Returns:
+    ee.Image: Image with the RVI_V band.
+    """
+    RVI_V = img.expression(
+    '((4*VH) / (VV + VH))',
+    {
+        'VH': img.select('VH'),
+        'VV': img.select('VV'),
+    },
+    ).rename('RVI_V')
+    return RVI_V
+
+def RFDI(img):
+    """
+    Calculate Radar Forest Degradation Index (RFDI).
+
+    Parameters:
+    img (ee.Image): Sentinel-1 image.
+
+    Returns:
+    ee.Image: Image with the RFDI band.
+    """
+    RFDI = img.normalizedDifference(['VV', 'VH']).rename('RFDI')
+    return RFDI
+
+def RVI4S1(img):
+    """
+    Calculate a specific Radar Vegetation Index for Sentinel-1.
+
+    Parameters:
+    img (ee.Image): Sentinel-1 image.
+
+    Returns:
+    ee.Image: Image with the RVI4S1 band.
+    """
+    RVI4S1 = img.expression(
+    '(q*(q+3))/((q+1)*(q+1))',
+    {
+        'q' : img.select('VH').divide(img.select('VV')),
+    },
+    ).rename('RVI4S1')
+    return RVI4S1
+
