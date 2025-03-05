@@ -3,7 +3,7 @@ import MSI_indices as indices
 import numpy as np
 
 def extractIndex(img, index):
-  print(f"Index passed: {index}")
+  print(f"Index passed: {'NDVI'}")
   index_function = getattr(indices, 'NDVI')
   index_img = index_function(img)
   band_name = index_img.bandNames().get(0)
