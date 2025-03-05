@@ -3,7 +3,8 @@ import MSI_indices as indices
 import numpy as np
 
 def extractIndex(img, index):
-  index_img = indices.index(img)
+  index_function = getattr(indices, index)
+  index_img = index_function(img)
   band_name = index_img.bandNames().get(0)
   calc = index_img.select(ee.String(band_name)).reduceRegion(
         reducer=ee.Reducer.toList(),
