@@ -1,5 +1,6 @@
 import ee
 import MSI_indices as indices
+import numpy as np
 
 def extractIndex(img, index):
   index_img = indices.index(img)
