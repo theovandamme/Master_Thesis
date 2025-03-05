@@ -4,7 +4,7 @@ import numpy as np
 
 def extractIndex(img, index, region):
   print(f"Index passed: {'NDVI'}")
-  index_function = getattr(indices, 'NDVI')
+  index_function = getattr(indices, index)
   index_img = index_function(img)
   band_name = index_img.bandNames().get(0)
   calc = index_img.select(ee.String(band_name)).reduceRegion(
