@@ -18,7 +18,7 @@ def extractIndex(img, index):
     })
 
 def convert_to_numpy(collection, index):
-
+  print(index)
   #index_collection = collection.map(index)
   # Extract NDVI values and dates
   index_values = collection.map(lambda img: extractIndex(img, index))
