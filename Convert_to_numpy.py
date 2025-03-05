@@ -2,7 +2,7 @@ import ee
 import MSI_indices as indices
 import numpy as np
 
-def extractIndex(img, index):
+def extractIndex(img, index, region):
   print(f"Index passed: {'NDVI'}")
   index_function = getattr(indices, 'NDVI')
   index_img = index_function(img)
@@ -17,11 +17,11 @@ def extractIndex(img, index):
         'date': img.date().format('YYYY-MM-dd')
     })
 
-def convert_to_numpy(collection, index):
+def convert_to_numpy(collection, index, region):
   print(index)
   #index_collection = collection.map(index)
   # Extract NDVI values and dates
-  index_values = collection.map(lambda img: extractIndex(img, index))
+  index_values = collection.map(lambda img: extractIndex(img, index, region))
   # Get the data as a list
   index_list = index_values.aggregate_array('index').getInfo()
   dates_list = index_values.aggregate_array('date').getInfo()
