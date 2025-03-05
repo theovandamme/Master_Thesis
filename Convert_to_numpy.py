@@ -3,7 +3,6 @@ import MSI_indices as indices
 import numpy as np
 
 def extractIndex(img, index, region):
-  print(f"Index passed: {'NDVI'}")
   index_function = getattr(indices, index)
   index_img = index_function(img)
   band_name = index_img.bandNames().get(0)
@@ -18,7 +17,6 @@ def extractIndex(img, index, region):
     })
 
 def convert_to_numpy(collection, index, region):
-  print(index)
   #index_collection = collection.map(index)
   # Extract NDVI values and dates
   index_values = collection.map(lambda img: extractIndex(img, index, region))
